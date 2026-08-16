@@ -1,170 +1,58 @@
-body {
-  font-family: "Open Sans";
-}
+/* Richard Burns -- academic site styles (Field Notes) */
+*{box-sizing:border-box;}
+body{margin:0;background:#eeece4;font-family:'Source Sans 3',sans-serif;}
+a{color:inherit;}
+.skip-link{position:absolute; left:-999px; top:auto; background:#23301F; color:#F5EFE0; padding:10px 16px; z-index:100; border-radius:4px;}
+.skip-link:focus{left:16px; top:16px;}
 
+  .page{
+    background:#F5EFE0; color:#2E2B22; font-family:'Source Sans 3',sans-serif;
+  }
+  .container{max-width:920px; margin:0 auto; padding:0 32px;}
+  .bars{display:flex; gap:10px; align-items:flex-end; height:34px;}
+  .bars .grp{display:flex; gap:3px; align-items:flex-end; height:100%;}
+  .bars .bar{width:6px; border-radius:1px;}
+  .bars .bar.ochre{background:#BD8B2E;}
+  .bars .bar.sage{background:#4C6B58;}
+  .intro{padding:48px 0 32px; border-bottom:1px solid #DDD5BE;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.06em; color:#8A6A2A; margin:0 0 12px;}
+  .name{font-family:'Fraunces',serif; font-weight:500; font-size:44px; line-height:1.05; margin:0 0 4px; color:#23301F;}
+  .name .last{font-weight:600;}
+  .role{font-size:17px; color:#5B5744; margin:12px 0 0; max-width:none; line-height:1.5;}
+  .role a{text-decoration:underline; text-decoration-color:#BD8B2E; text-underline-offset:3px;}
+  .layout{display:grid; grid-template-columns:260px 1fr; gap:40px; padding:40px 0 64px;}
+  .card{background:#FBF8EF; border:1px solid #E4DCC3; border-radius:4px; padding:20px 22px; margin-bottom:20px;}
+  .card h3{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.06em; color:#8A6A2A; margin:0 0 12px; font-weight:500;}
+  .ext-link{display:flex; align-items:center; gap:5px; color:#8A6A2A; text-decoration:none; border-bottom:1px solid #D9C48F;}
+  .jump-link{color:#8A6A2A; text-decoration:underline; text-decoration-color:#D9C48F; text-underline-offset:4px; font-size:14px;}
+  .card ul{margin:0; padding:0; list-style:none;}
+  .card li{font-size:14px; line-height:1.6; padding:6px 0; border-bottom:1px solid #EEE7D3;}
+  .card li:last-child{border-bottom:none;}
+  .tag{display:inline-block; font-size:11px; font-family:'IBM Plex Mono',monospace; padding:1px 6px; border-radius:3px; margin-left:6px;}
+  .tag.person{background:#E5EEE1; color:#3C5333;}
+  .tag.zoom{background:#F1E4CB; color:#7A5A1E;}
+  .photo{width:100%; aspect-ratio:1; background:#DED2AE; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:15px; color:#8A6A2A; margin-bottom:20px;}
+  .section-title{font-family:'Fraunces',serif; font-weight:500; font-size:22px; margin:0 0 6px; color:#23301F;}
+  .divider{display:flex; gap:8px; align-items:flex-end; height:14px; margin:32px 0;}
+  .divider .grp{display:flex; gap:2px; align-items:flex-end; height:100%;}
+  .divider .bar{width:4px; border-radius:1px;}
+  .divider .bar.ochre{background:#C9AD73;}
+  .divider .bar.sage{background:#93A98C;}
+  .pub{padding:18px 0; border-top:1px solid #E4DCC3;}
+  .pub:first-of-type{border-top:none; padding-top:0;}
+  .pub .title{font-weight:600; font-size:15px; margin:0 0 4px;}
+  .pub .meta{font-size:13px; color:#6B6752; margin:0;}
+  .award{display:inline-block; margin-top:6px; font-size:11px; font-family:'IBM Plex Mono',monospace; color:#4C6B58; border:1px solid #4C6B58; border-radius:3px; padding:2px 8px;}
+  .pub .links{margin:6px 0 0; font-size:12px;}
+  .pub .links a{color:#8A6A2A; text-decoration:none; border-bottom:1px solid #D9C48F; margin-right:12px;}
+  .course-cat{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.05em; color:#8A6A2A; margin:24px 0 10px; font-weight:500;}
+  .course-cat:first-of-type{margin-top:0;}
+  .course-list{list-style:none; margin:0 0 8px; padding:0;}
+  .course-list li{display:flex; gap:16px; font-size:14px; padding:9px 0; border-top:1px solid #E4DCC3;}
+  .course-list li .code{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#4C6B58; min-width:88px; flex-shrink:0; padding-top:1px;}
+  .course-list li .ttl{color:#2E2B22;}
+  .course-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .course-pill{font-family:'IBM Plex Mono',monospace; font-size:12px; background:#EFE8D3; color:#5B4A20; padding:5px 9px; border-radius:3px;}
+  .site-footer{border-top:1px solid #DDD5BE; padding:20px 0; font-size:12px; color:#8A8672;}
 
-
-div.name span {
-  font-family: Courier;
-  font-size: 80%;
-  font-weight: 400;
-}
-
-div.name span.lname {
-  margin-left:-.25em;
-  color: green;
-  font-size:100%;
-  font-weight: 600;
-}
-
-div.name span.degree {
-  margin-left:-.5em;
-  font-size:60%;
-  color: darkgray;
-}
-
-@-webkit-keyframes typing { from { width: 0; } }
-@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
-
-
-div.name h1 { 
-   /* font: bold 300% Consolas, Monaco, monospace; */
-    border-right: .1em solid black;
-    /* width: 16.5em; */
-    width: 18ch;
-    margin-top: .3em;
-    margin-right: .8em; 
-    white-space: nowrap;
-    overflow: hidden;
-    -webkit-animation: typing 3s steps(18, end),
-               blink-caret .5s step-end infinite alternate;
-}
-
-
-div#top  {
-  padding-bottom: 1.5em;
-  background-color: rgba(255, 255, 255, .01);
-  background-image: url("http://www.transparenttextures.com/patterns/cloth-alike.png");
-}
-
-.highlight {
-  /* background-image: linear-gradient(#ffd900, #ffd900); */
-  background-image: linear-gradient(gold, gold);
-  background-repeat: no-repeat;
-  background-position: 0% 100%;
-  /* background-size: 100% 2px; */
-  background-size: 100% 100%;
-}
-
-.highlight:hover {
-  /* background-size: 100% 100%; */
-  background-size: 100% 2px; 
-  background-position: 0% 100%;
-  transition: background-position .5s, background-size .3s;
-}
-
-#top a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: coral;
-}
-
-#top a:hover {
-  color: lightsalmon;
-  font-weight: 400;
-}
-
-
-.biopic {
-  max-height: 350px; 
-  float: right;
-}
-
-.title {
-  text-align: right;
-  padding-right: 2em;
-}
-
-#description {
-  line-height: 2em;
-}
-
-.title1 {
-  font-size: 120%;
-  font-weight: 600;
-}
-
-.title2 {
-  font-size: 100%;
-  font-weight: 400;
-}
-
-.title3 {
-  font-size: 65%;
-  font-weight: 300;
-}
-
-
-
-
-div.slogan {
-  background-color: black;
-  color: white;
-  padding-bottom: 1em;
-  padding-top: 1.5em;
-  font-weight: 300;
-}
-
-div.slogan p {
-  font-weight: 300;
-  font-size: 80%;
-}
-
-
-
-div.content li {
-  list-style: none;
-  margin-left: -2.5em;
-}
-
-div.content {
-   /* for the li items */
-   font-size: 80%;
-}
-
-div.content h2 {
-  color: brown;
-  font-size: 150%;
-  font-weight: 600;
-}
-
-div.content h3 {
-  color: brown;
-  font-size: 125%;
-}
-
-ul.pubs li {
-  padding-bottom: 1em;
-}
-
-ul.edu li, ul.office li, ul.teach li {
-  padding-bottom: .5em;
-}
-
-.jumbotron {
-  border-radius: 0px;
-}
-
-.award {
-  color: green;
-}
-
-.salient {
-  color: yellow;
-}
-
-
-.address {
-  text-align: right;
-}
-
+  
