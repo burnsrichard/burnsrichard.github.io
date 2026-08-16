@@ -1,0 +1,65 @@
+name: Deploy to WCU server
+
+# GitHub Pages keeps auto-publishing from the default branch on its own —
+# this workflow only mirrors the same tracked files to the WCU CS department
+# server over SFTP so www.cs.wcupa.edu/RBURNS/ stays in sync.
+#
+# NOTE: SSH to this server requires Duo MFA approval on every login, even for
+# key-based auth. That approval happens at the SSH/PAM layer on the server
+# side (not bounded by a short client timeout), so this job will sit waiting
+# after each push until the push notification is approved on the account
+# owner's phone (or the server's own login grace period elapses and the step
+# fails). This is expected — re-run the job if you miss the window.
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy over SFTP
+        env:
+          SFTP_HOST: ${{ secrets.WCU_SSH_HOST }}
+          SFTP_PORT: ${{ secrets.WCU_SSH_PORT }}
+          SFTP_USER: ${{ secrets.WCU_SSH_USERNAME }}
+          SFTP_REMOTE_PATH: ${{ secrets.WCU_SSH_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+
+          mkdir -m 700 -p ~/.ssh
+          printf '%s\n' "${{ secrets.WCU_SSH_PRIVATE_KEY }}" > ~/.ssh/wcu_deploy_key
+          chmod 600 ~/.ssh/wcu_deploy_key
+          cat .github/wcu-known-hosts >> ~/.ssh/known_hosts
+
+          # Build an sftp batch script from the tracked files (skips .github/,
+          # .gitignore, and anything else not meant for the public site).
+          BATCH="$(mktemp)"
+          {
+            git ls-files | grep -v -E '^\.github/|^\.gitignore$' | sort | while IFS= read -r f; do
+              d="$(dirname "$f")"
+              if [ "$d" != "." ]; then
+                echo "-mkdir \"$SFTP_REMOTE_PATH/$d\""
+              fi
+              echo "put \"$f\" \"$SFTP_REMOTE_PATH/$f\""
+            done
+            echo "bye"
+          } > "$BATCH"
+
+          echo "== sftp batch script =="
+          cat "$BATCH"
+
+          sftp -b "$BATCH" \
+            -P "$SFTP_PORT" \
+            -i ~/.ssh/wcu_deploy_key \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=30 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=20 \
+            "$SFTP_USER@$SFTP_HOST"
