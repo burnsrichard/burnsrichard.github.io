@@ -31,7 +31,7 @@ a{color:inherit;}
   .tag{display:inline-block; font-size:11px; font-family:'IBM Plex Mono',monospace; padding:1px 6px; border-radius:3px; margin-left:6px;}
   .tag.person{background:#E5EEE1; color:#3C5333;}
   .tag.zoom{background:#F1E4CB; color:#7A5A1E;}
-  .photo{width:100%; aspect-ratio:1; background:#DED2AE; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:15px; color:#8A6A2A; margin-bottom:20px;}
+  .photo{width:100%; aspect-ratio:1; background:#DED2AE; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:15px; color:#8A6A2A; margin-bottom:20px; object-fit:cover; object-position:top;}
   .section-title{font-family:'Fraunces',serif; font-weight:500; font-size:22px; margin:0 0 6px; color:#23301F;}
   .divider{display:flex; gap:8px; align-items:flex-end; height:14px; margin:32px 0;}
   .divider .grp{display:flex; gap:2px; align-items:flex-end; height:100%;}
