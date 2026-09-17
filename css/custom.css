@@ -55,4 +55,13 @@ a{color:inherit;}
   .course-pill{font-family:'IBM Plex Mono',monospace; font-size:12px; background:#EFE8D3; color:#5B4A20; padding:5px 9px; border-radius:3px;}
   .site-footer{border-top:1px solid #DDD5BE; padding:20px 0; font-size:12px; color:#8A8672;}
 
-  
+  @media (max-width:700px){
+    .layout{grid-template-columns:1fr; gap:32px;}
+    .name{font-size:34px;}
+  }
+  @media (max-width:480px){
+    .container{padding:0 20px;}
+    .intro{padding:36px 0 24px;}
+    .name{font-size:28px;}
+    .course-list li{flex-wrap:wrap; gap:4px 16px;}
+  }
